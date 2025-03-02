@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = "us-east-1"
-         TERRAFORM_BIN = '/opt/homebrew/bin/terraform'  // Adjust this to your local Terraform path
+        TERRAFORM_BIN = '/opt/homebrew/bin/terraform'  // Adjust this to your local Terraform path
     }
    
     stages {
@@ -15,8 +15,8 @@ pipeline {
 
          stage('Check Terraform Version') {
             steps {
-                sh 'which {TERRAFORM_BIN}'
-                sh '{TERRAFORM_BIN} -v'
+                sh 'which ${TERRAFORM_BIN}'
+                sh '${TERRAFORM_BIN} -v'
             }
         }
 
