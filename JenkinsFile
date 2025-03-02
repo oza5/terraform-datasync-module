@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-         stage('Check Terraform Version') {
+         stage('Check Terraform Version ') {
             steps {
                 sh 'which ${TERRAFORM_BIN}'
                 sh '${TERRAFORM_BIN} -v'
