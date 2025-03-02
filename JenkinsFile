@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "us-east-1"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-repo/terraform-code.git'
+            }
+        }
+
+        stage('Initialize Terraform') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
+                    sh '''
+                    terraform init
+                    '''
+                }
+            }
+        }
+
+        stage('Plan Terraform Changes') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
+                    sh '''
+                    terraform plan -out=tfplan
+                    '''
+                }
+            }
+        }
+
+        stage('Apply Terraform Changes') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
+                    sh '''
+                    terraform apply -auto-approve tfplan
+                    '''
+                }
+            }
+        }
+    }
+}
