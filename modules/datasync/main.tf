@@ -18,7 +18,7 @@ resource "aws_datasync_location_nfs" "source" {
 resource "aws_datasync_location_s3" "destination" {
   s3_bucket_arn = var.s3_bucket_arn
   subdirectory  = var.s3_prefix
-  storage_class = "STANDARD"
+
 
   s3_config {
     bucket_access_role_arn = var.s3_role_arn
