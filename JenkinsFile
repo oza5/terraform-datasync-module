@@ -3,10 +3,9 @@ pipeline {
 
     environment {
         AWS_REGION = "us-east-1"
-         TERRAFORM_BIN = '/usr/local/bin/terraform'  // Adjust this to your local Terraform path
+         TERRAFORM_BIN = '/opt/homebrew/bin/terraform'  // Adjust this to your local Terraform path
     }
    
-
     stages {
         stage('Clone Repository') {
             steps {
