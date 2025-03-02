@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
                     sh '''
-                    terraform init
+                    ${TERRAFORM_BIN} init
                     '''
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
                     sh '''
-                    terraform plan -out=tfplan
+                    ${TERRAFORM_BIN} plan -out=tfplan
                     '''
                 }
             }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
                     sh '''
-                    terraform appy -auto-approve tfplan
+                    ${TERRAFORM_BIN} appy -auto-approve tfplan
                     '''
                 }
             }
