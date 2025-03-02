@@ -43,7 +43,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
                     sh '''
-                    terraform apply -auto-approve tfplan
+                    terraform appy -auto-approve tfplan
                     '''
                 }
             }
