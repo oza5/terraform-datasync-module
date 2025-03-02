@@ -12,6 +12,13 @@ pipeline {
             }
         }
 
+         stage('Check Terraform Version') {
+            steps {
+                sh 'which terraform'
+                sh 'terraform -v'
+            }
+        }
+
         stage('Initialize Terraform') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-terraform']]) {
